@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+    <style>
+        body{
+            text-align: center;
+            margin-top:200px;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return addition();">
+        <input type="number" id="nb1" name="nb1" required>
+        <span>+</span>
+        <input type="number" id="nb2" name="nb2" required>
+        <span id="resultat"></span>
+        <button type="submit">Calculer</button>
+    </form>
+    <br>
+    <br>
+    <form onsubmit="return permuter();">
+        <input type="number" id="champ1" name="nb1" required>
+        <input type="number" id="champ2" name="nb2" required>
+        <button type="submit">Permuter</button>
+    </form>
+
+
+    <script>
+        function addition() {
+            const nb1 = parseInt(document.getElementById("nb1").value);
+            const nb2 = parseInt(document.getElementById("nb2").value);
+
+            const somme = nb1 + nb2;
+
+            document.getElementById("resultat").textContent = "Résultat : " + somme;
+
+            return false;
+            }
+        
+        function permuter() {
+            
+            const champ1 = document.getElementById("champ1");
+            const champ2 = document.getElementById("champ2");
+
+            const temp = champ1.value;
+            champ1.value = champ2.value;
+            champ2.value = temp;
+
+            return false;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+    
+</head>
+
+<body>
+
+    <script>
+        
+        // Exercice 4 
+        var a = prompt("Entrez la valeur de 'a' :");
+        var b = prompt("Entrez la valeur de 'b' :");
+        var c = prompt("Entrez la valeur de 'c' :");
+
+    
+        a = parseFloat(a);
+        b = parseFloat(b);
+        c = parseFloat(c);
+
+        
+
+        if (a == b && b == c){
+            alert("les trois variables sont égales");
+        }
+        if ((a == b && a != c) || (a==c && a!=b) || (c == b && c != a)){
+            alert("Deux des variables sont de valeurs égales");
+        }
+        if(a != b && a != c && c != b){
+            alert("Les trois variables sont différents");
+
+        }
+
+        //Exercice 5
+        var HT = prompt("Enter valeur de HT");
+        var TAX = prompt("Enter valeur de TVA");
+        if (HT === null || HT === "" || isNaN(HT)) {
+                alert("Invalid net price! Please enter a valid number.");
+        }
+        if (TAX === null || TAX === "" || isNaN(TAX)) {
+                alert("Invalid TAX! Please enter a valid number.");
+        }
+        var TTC = HT * (1 + TAX / 100);;
+        document.body.innerHTML = "Net Price: " + HT + " €<br>" +
+                                    "TAX: " + TAX + " %<br>" +
+                                    "Total Price : " + TTC.toFixed(2) + " €";;
+
+       
+
+
+    </script>
+</body>
+</html>

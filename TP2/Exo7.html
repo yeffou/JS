@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP2</title>
+
+</head>
+<style>
+    .menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    }
+    .hover:hover{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <a href="https://www.w3school.com" onclick="redirectionInterdite(event)">Lien avec redirection interdite</a>
+    <br>
+    <br>
+    <div class = "hover" onclick="toggleMenu()" onmouseleave="closeMenu()">Cliquez ici pour ouvrir le menu</div>
+    <div id="menu" class="menu">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+    </div>
+
+    <script>
+        function redirectionInterdite(event) {
+            event.preventDefault();
+            alert("Redirection interdite");
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+            } 
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = "none";
+        }
+    </script>
+</body>
+</html>

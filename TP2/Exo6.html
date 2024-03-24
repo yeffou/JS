@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+    
+</head>
+
+<body>
+
+    <form id="contact-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br/>
+        <br>
+      
+        <label for="objet">Objet de l'email:</label>
+        <input type="text" id="objet" name="objet" required><br/>
+        <br>
+      
+        <label for="corps">Corps de l'email:</label>
+        <textarea id="corps" name="corps" required></textarea><br>
+        <br>
+      
+        <button type="submit">Envoyer</button>
+    </form>
+    <script>
+
+    //Execice 6
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const objet = document.getElementById('objet').value;
+            const corps = document.getElementById('corps').value;
+
+            const html = `
+            Sender : ${email} <br />
+            Objet : ${objet} <br />
+            Corps de l'Email: ${corps}
+            `
+        
+            document.body.innerHTML += html
+            
+        });
+
+
+    </script>
+</body>
+</html>
