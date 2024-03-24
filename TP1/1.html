@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body> 
+
+    <p id="insertTextHere"></p>
+
+    <table id="monTableau"></table>
+
+    <script>
+    // Exercice 1
+        var userInput = prompt("Ex1: Veuillez entrer une chaîne de caractères :");
+    
+        if(userInput !== null) {
+            var insertElement = document.getElementById("insertTextHere");
+    
+            document.body.innerText = userInput + '\n';
+        }
+
+
+    // Exercice 2
+    var a = prompt("Ex2: Entrez la valeur de 'a' :");
+
+    var b = prompt("Ex2: Entrez la valeur de 'b' :");
+
+    a = parseFloat(a);
+    b = parseFloat(b);
+
+    if (!isNaN(a) && !isNaN(b)) {
+        var result = a + b;
+
+        alert("La somme de 'a' et 'b' est : " + result);
+    } else {
+        alert("Veuillez entrer des valeurs numériques valides pour 'a' et 'b'.");
+    }
+
+
+    // Exercice 3
+    var budget = prompt("Ex3: Entrez votre budget :");
+
+    var achats = prompt("Ex3: Entrez votre achats- :");
+
+    if (budget >= achats) {
+        alert("Le budget permet de payer les achats.");
+    } else {
+        alert("Le budget ne permet pas de payer les achats.");
+    }
+
+
+    // Exercice 4
+    var prixHT = prompt("Ex4: Entrez le prix hors taxes (HT) :");
+
+    prixHT = parseFloat(prixHT);
+
+    if (!isNaN(prixHT)) {
+        var prixTTC = prixHT * 1.20;
+
+        document.body.innerText += "Le prix TTC (TVA 20%) est : " + prixTTC.toFixed(2) + " € \n";
+    } else {
+        document.body.innerText += "Veuillez entrer un prix valide.\n";
+    }
+
+
+    // Exercice 5
+     var prixHT = prompt("Ex5: Entrez le prix hors taxes (HT) :");
+
+    prixHT = parseFloat(prixHT);
+
+    if (isNaN(prixHT) || prixHT <= 0) {
+
+        alert("Le prix hors taxes (HT) doit être un nombre positif.\n");
+
+    } else {
+
+        var tauxTVA = prompt("Ex5: Entrez le taux de TVA en pourcentage (%):");
+
+            tauxTVA = parseFloat(tauxTVA);
+
+            if (isNaN(tauxTVA) || tauxTVA < 0) {
+                alert("Le taux de TVA doit être un nombre positif ou nul.\n");
+            } else {
+                var prixTTC = prixHT * (1 + tauxTVA / 100);
+
+                document.body.innerText += "Le prix TTC est de : " + prixTTC.toFixed(2) + " € \n";
+            }
+        }
+    
+    
+    // Exercice 6
+    var prixHT = prompt("Ex6: Entrez le prix hors taxes (HT) :");
+
+    prixHT = parseFloat(prixHT);
+
+    if (isNaN(prixHT) || prixHT <= 0) {
+        alert("Le prix hors taxes (HT) doit être un nombre positif.");
+    } else {
+        var tauxTVA = prompt("Ex6: Entrez le taux de TVA en pourcentage (%):");
+
+            tauxTVA = parseFloat(tauxTVA);
+
+            if (isNaN(tauxTVA) || tauxTVA < 0) {
+                alert("Le taux de TVA doit être un nombre positif ou nul.");
+            } else {
+                var prixTTC = prixHT * (1 + tauxTVA / 100);
+
+                var couleur = prixTTC > 100 ? 'red' : 'green';
+
+                document.body.innerHTML += '<p style="color: ' + couleur + ';">Le prix TTC est de : ' + prixTTC.toFixed(2) + ' €</p> \n';
+            }
+        }
+
+        
+    // Exercice 7
+    var cocktailElement = "<h1>Mes <span>cocktails préférés</span></h1><p>Mojito</p><p>Gin Fizz</p><p>Bloody mary<p><p>Long Island Iced Tea</p><p>Mais si je ne devais qu'en retenir qu'un : <strong id=\"cocktail\"></strong></p>"
+    document.body.innerHTML += cocktailElement;
+
+
+    // Exercice 8
+    var table = '<table border="1">'
+    var rows = 3;
+    var columns = 3;
+    for (var i =0; i < rows; i++){
+        table += "<tr>"
+        for(var j = 0 ; j < columns ; j++){
+            table += '<td>  Cell' + i +'-'+ j + '</td> \n'
+        }
+        table += "<tr>"
+    }
+    document.body.innerHTML += table;
+
+    </script> 
+    </body>
+</html>
+     
+    
