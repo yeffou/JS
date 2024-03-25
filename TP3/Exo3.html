@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3</title>
+</head>
+<body>
+    <form>
+        <label for="Code">Code Etudiant</label>
+        <input type="text" id="Code" required><br><br>
+        <label for="Nom">Nom Etudiant</label>
+        <input type="text" id="Nom" required><br><br>
+        <label for="Prenom">Prenom Etudiant</label>
+        <input type="text" id="Prenom" required><br><br>
+        <label for="Semestre">Semestre</label>
+        <select id="Semestre" required>
+            <option value="">Choisir le semestre</option>
+            <option value="Semestre1">Semestre 1</option>
+            <option value="Semestre2">Semestre 2</option>
+        </select><br><br>
+        <label for="module1">Module 1</label>
+        <input type="text" id="module1" required><br><br>
+        <label for="module2">Module 2</label>
+        <input type="text" id="module2" required><br><br>
+        <label for="module3">Module 3</label>
+        <input type="text" id="module3" required><br><br>
+        <label for="module4">Module 4</label>
+        <input type="text" id="module4" required><br><br>
+        <label for="module5">Module 5</label>
+        <input type="text" id="module5" required><br><br>
+        <label for="module6">Module 6</label>
+        <input type="text" id="module6" required><br><br>
+        <button type="submit">submit</button>
+        <button type="reset">Annuler</button>
+    </form>
+
+    <div id="table_Container"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const tableContainer = document.getElementById('table_Container');
+        let tableCreated = false; 
+    
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+    
+            const Code = document.getElementById('Code').value;
+            const Nom = document.getElementById('Nom').value;
+            const Prenom = document.getElementById('Prenom').value;
+            const Semestre = document.getElementById('Semestre').value;
+            const Module_1 = parseFloat(document.getElementById('module1').value);
+            const Module_2 = parseFloat(document.getElementById('module2').value);
+            const Module_3 = parseFloat(document.getElementById('module3').value);
+            const Module_4 = parseFloat(document.getElementById('module4').value);
+            const Module_5 = parseFloat(document.getElementById('module5').value);
+            const Module_6 = parseFloat(document.getElementById('module6').value);
+    
+            let Moyenne = (Module_1 + Module_2 + Module_3 + Module_4 + Module_5 + Module_6) / 6;
+    
+            let Eliminatoire = false;
+            let NonValide = 0;
+    
+            for (let i = 1; i < 7; i++) {
+                const Module = 'module' + i;
+                if (parseFloat(document.getElementById(Module).value) < 8) {
+                    Eliminatoire = true;
+                }
+                if (parseFloat(document.getElementById(Module).value) >= 8 && parseFloat(document.getElementById(Module).value) < 12) {
+                    NonValide++;
+                }
+            }
+            let decision;
+            if (Moyenne >= 12 && NonValide < 3 && !Eliminatoire) {
+                decision = "Semestre Validé";
+            } else {
+                decision = "Semestre Echoué";
+            }
+    
+            if (!tableCreated) { 
+                let table = '<table border = 1>';
+                table += '<tr>';
+                table += '<th>Code Etudiant</th>';
+                table += '<th>Nom</th>';
+                table += '<th>Prenom</th>';
+                table += '<th>Semestre</th>';
+                table += '<th>Module 1</th>';
+                table += '<th>Module 2</th>';
+                table += '<th>Module 3</th>';
+                table += '<th>Module 4</th>';
+                table += '<th>Module 5</th>';
+                table += '<th>Module 6</th>';
+                table += '<th>Moyenne</th>';
+                table += '<th>Décision</th>';
+                table += '</tr>';
+                table += '</table>';
+                tableContainer.innerHTML = table;
+                tableCreated = true;
+            }
+    
+            let newRow = tableContainer.querySelector('table').insertRow(-1);
+            newRow.innerHTML = `
+                <td>${Code}</td>
+                <td>${Nom}</td>
+                <td>${Prenom}</td>
+                <td>${Semestre}</td>
+                <td>${Module_1.toFixed(2)}</td>
+                <td>${Module_2.toFixed(2)}</td>
+                <td>${Module_3.toFixed(2)}</td>
+                <td>${Module_4.toFixed(2)}</td>
+                <td>${Module_5.toFixed(2)}</td>
+                <td>${Module_6.toFixed(2)}</td>
+                <td>${Moyenne.toFixed(2)}</td>
+                <td>${decision}</td>`;
+        });
+    </script>
+    
+</body>
+</html>

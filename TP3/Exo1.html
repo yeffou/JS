@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <form>
+        <label for="Nom">Nom:</label>
+        <input type="text" id="Nom" name="Nom" required><br>
+        <br>
+        <label for="Prenom">Prenom:</label>
+        <input type="text" id="Prenom" name="Prenom" required><br>
+        <br>
+        <label for="Email">Email:</label>
+        <input type="Email" id="Email" name="Email" required><br>
+        <br>
+        <label for="Mdp">Mot de passe:</label>
+        <input type="password" id="Mdp" name="Mdp" required><br>
+        <br>
+        <label for="Resaisir">Resaisir le mot de passe:</label>
+        <input type="password" id="Resaisir" name="Resaisir" required><br>
+        <br>
+        <label for="Phone">Telephone:</label>
+        <input type="number" id="Phone" name="Phone" required><br>
+        <br>
+        <label for="langue">Langue:</label>
+        <select id="Langue" name="Langue" required>
+            <option value="Anglais">Anglais</option>
+            <option value="Francais">Francais</option>
+            <option value="Arabe">Arabe</option>
+        </select><br>
+        <br>
+        <label for="Commentaire">Commentaire</label>
+        <textarea id="Commentaire" name="Commentaire" required></textarea><br>
+        <br>
+        <button type="submit">Valider</button>
+        <button type="reset">Annuler</button>
+    </form>
+
+    <script>
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+
+        const Nom = document.getElementById('Nom').value;
+        const Prenom = document.getElementById('Prenom').value;
+        const Email = document.getElementById('Email').value;
+        const Mdp = document.getElementById('Mdp').value;
+        const Confirmation = document.getElementById('Resaisir').value;
+        const Phone = document.getElementById('Phone').value;
+        const Langue = document.getElementById('Langue').value;
+        const Commentaire = document.getElementById('Commentaire').value;
+
+        const html = `
+        Nom: ${Nom} <br>
+        Prenom: ${Prenom} <br>
+        Email: ${Email} <br>
+        password: ${Mdp} <br>
+        Telephone: ${Phone} <br>
+        Langue: ${Langue} <br>
+        Commentaire: ${Commentaire} <br>
+        `;
+
+        if(Confirmation == Mdp){
+            document.body.innerHTML += html;
+        }
+        else{
+            alert("Password Confirmation Error!")
+            }
+        });
+    </script>
+</body>
+
+</html>
