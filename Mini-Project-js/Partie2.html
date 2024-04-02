@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Configuration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #1d1f3e;
+    }
+    h2, label{
+        color: white;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #0e0d1a;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin-top: 20px;
+    }
+    button:hover {
+      opacity:0.5;
+    }
+    #quiz {
+      display: none;
+      margin-top: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #1d1f3e;
+    }
+    .question {
+      color: #9e9ea6;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-family: italic;
+    }
+    .answer {
+      margin-bottom: 10px;
+    }
+    .answer label {
+      font-weight: lighter;
+    }
+    h1{
+        color: #eaeaf1;
+        text-align: center;
+    }
+    
+    
+  </style>
+</head>
+<body>
+
+<form id="quizForm">
+  <h2>API HELPER</h2>
+
+  <label for="numQuestions">Total Number of Questions:</label>
+  <input type="number" id="numQuestions" min="1" max="50" value="10">
+
+  <label for="category">Category:</label>
+  <select id="category">
+    <option value="9">General Knowledge</option>
+    <option value="18">Science: Computers</option>
+    <option value="21">Sports</option>
+  </select>
+
+  <label for="difficulty">Difficulty Level:</label>
+  <select id="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <label for="type">Type of Quiz:</label>
+  <select id="type">
+    <option value="multiple">Multiple Choice</option>
+    <option value="boolean">True / False</option>
+  </select>
+
+  <label for="encoding">Text Encoding:</label>
+  <select id="encoding">
+    <option value="default">Default</option>
+    <option value="base64">Base64</option>
+  </select>
+  
+  <button type="button" onclick="startQuiz()">GENERATE API URL</button>
+</form>
+
+<div id="quiz"></div>
+
+<script>
+    let Data = [];
+
+    async function retrieveQuestions(categoryID, complexity, totalQuestions, quizType, textEncoding) {
+        const url = `https://opentdb.com/api.php?amount=${totalQuestions}&category=${categoryID}&difficulty=${complexity}&type=${quizType}&encoding=${textEncoding}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.results;
+    }
+
+    function showQuiz(questions) {
+
+        const quiz = document.getElementById('quiz');
+        let html = '<h1>Quizz Section</h1>';
+        questions.forEach((question, index) => {
+            const options = [...question.incorrect_answers, question.correct_answer];
+            html += `<div class="question">`;
+                html += `<p>${index + 1}. ${question.question}</p>`;
+            options.forEach(option => {
+                html += `<div class="answer">
+                            <input type="radio" name="question${index}" value="${option}">
+                            <label>${option}</label>
+                        </div>`;
+            });
+            html += `</div>`;
+        });
+        html += `<button onclick="submitQuiz()">Submit Quiz</button>`;
+        quiz.innerHTML = html;
+        document.getElementById('quizForm').style.display = 'none';
+        document.getElementById('quiz').style.display = 'block';
+    }
+
+    function startQuiz() {
+        const category = document.getElementById('category').value;
+        const difficulty = document.getElementById('difficulty').value;
+        const Questions = document.getElementById('numQuestions').value;
+        const Type = document.getElementById('type').value;
+        const Encoding = document.getElementById('encoding').value;
+
+        retrieveQuestions(category, difficulty, Questions, Type, Encoding)
+        .then(questions => {
+            Data = questions;
+            showQuiz(questions);
+        })
+        .catch(error => console.error('Error fetching questions:', error));
+    }
+
+    function submitQuiz() {
+        const questions = document.querySelectorAll('.question');
+        let score = 0;
+
+        questions.forEach((question, index) => {
+            const myAnswer = question.querySelector('input[type="radio"]:checked');
+            if (myAnswer) { 
+                const correctAnswer = Data[index].correct_answer;
+                if (myAnswer.value === correctAnswer) {
+                    score++;
+                }
+            }
+        });
+
+        alert(`Your score is: ${score} out of ${Data.length}`);
+        location.reload();
+    }
+
+</script>
+
+</body>
+</html>

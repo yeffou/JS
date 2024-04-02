@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .intro {
+      background-color: #fff;
+      color: #272f39;
+      padding: 20px 0;
+      margin-bottom: -60px;
+      text-align: center;
+    }
+    .result {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .result p {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: -150px;
+    }
+    .result span {
+      font-size: 36px;
+      color: #1100ff;
+    }
+    .quiz {
+      padding: 40px 20px;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+    .quiz h2 {
+      color: #272f39;
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .answer {
+      margin-bottom: 10px;
+    }
+    .answer label {
+      font-size: 16px;
+      margin-left: 10px;
+    }
+    .quiz-form {
+      background-color: #6f85b4;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .quiz-form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .quiz-form input[type="radio"] {
+      margin-right: 10px;
+    }
+    .btn {
+      background-color: #272f39;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      display: block;
+      margin: 20px auto;
+    }
+    .btn:hover {
+      background-color: #272f39;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="container">
+    <h1>Quiz Project</h1>
+  </div>
+</div>
+
+<div class="result d-none">
+  <div class="container">
+    <p>You scored: <span></span></p>
+  </div>
+</div>
+
+<div class="quiz">
+  <div class="container">
+    <h2>Let's Get Started!</h2>
+
+    <form class="quiz-form">
+      <div class="question">
+        <p>1. What is the capital of France?</p>
+        <div class="answer">
+          <input type="radio" name="q1" value="A" id="question1_1">
+          <label for="question1_1">Paris</label>
+        </div>
+        <div class="answer">
+          <input type="radio" name="q1" value="B" id="question1_2">
+          <label for="question1_2">London</label>
+        </div>
+      </div>
+      <div class="question">
+        <p>2. Who painted the Mona Lisa?</p>
+        <div class="answer">
+          <input type="radio" name="q2" value="A" id="question2_1">
+          <label for="question2_1">Leonardo da Vinci</label>
+        </div>
+        <div class="answer">
+          <input type="radio" name="q2" value="B" id="question2_2">
+          <label for="question2_2">Pablo Picasso</label>
+        </div>
+      </div>
+      <div class="question">
+        <p>3. What is the chemical symbol for water?</p>
+        <div class="answer">
+          <input type="radio" name="q3" value="A" id="question3_1">
+          <label for="question3_1">H2O</label>
+        </div>
+        <div class="answer">
+          <input type="radio" name="q3" value="B" id="question3_2">
+          <label for="question3_2">CO2</label>
+        </div>
+      </div>
+      <div class="question">
+        <p>4. What is the largest planet in our solar system?</p>
+        <div class="answer">
+          <input type="radio" name="q4" value="A" id="question4_1">
+          <label for="question4_1">Jupiter</label>
+        </div>
+        <div class="answer">
+          <input type="radio" name="q4" value="B" id="question4_2">
+          <label for="question4_2">Mars</label>
+        </div>
+      </div>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script>
+    const correctAnswers = ['A', 'A', 'A', 'A'];
+    const form = document.querySelector('.quiz-form');
+    const questions = document.querySelectorAll('.question');
+
+    questions.forEach(qEl => {
+      const timerSpan = document.createElement('span');
+      timerSpan.classList.add('timer');
+      timerSpan.textContent = ' (6s)';
+      qEl.appendChild(timerSpan);
+    });
+
+    let currQuestion = 0; 
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+    const Answers = [];
+
+    questions.forEach((qEl, index) => {
+      const timerSpan = qEl.querySelector('.timer');
+      clearInterval(timerSpan.intervalId); 
+      const radios = qEl.querySelectorAll('input[type="radio"]');
+      let selectedAnswer;
+
+      radios.forEach(radio => {
+        if (radio.checked) {
+          selectedAnswer = radio.value;
+        }
+      });
+
+      Answers.push(selectedAnswer);
+
+      if (!selectedAnswer) { 
+        radios.forEach(radio => radio.disabled = true);
+      }
+    });
+
+    let score = 0;
+    Answers.forEach((answer, index) => {
+      if (answer === correctAnswers[index]) {
+        score += 25;
+      }
+    });
+    const result = document.querySelector('.result');
+    result.querySelector('span').textContent = `${score}%`;
+    result.classList.remove('d-none');
+
+    scrollToElement('.result');
+
+    let output = 0;
+    const timerInterval = setInterval(() => {
+      result.querySelector('span').textContent = `${output}%`;
+      if (output === score) {
+        clearInterval(timerInterval);
+      } else {
+        output++;
+      }
+    }, 10);
+
+    if (currQuestion < questions.length - 1) {
+      currQuestion++;
+      const nextQEl = questions[currQuestion];
+      setTimeout(() => {
+        startTimerForQuestion(nextQEl);
+      }, 100);
+    }
+  });
+
+  const startTimerForQuestion = (qEl) => {
+    const timerSpan = qEl.querySelector('.timer');
+    let timeLeft = 6;
+
+    timerSpan.intervalId = setInterval(() => {
+      timeLeft--;
+      timerSpan.textContent = ` (${timeLeft}s)`;
+      if (timeLeft === 0) {
+        qEl.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
+        clearInterval(timerSpan.intervalId);
+        
+        currQuestion++;
+
+        if (currQuestion < questions.length) {
+          const nextQEl = questions[currQuestion];
+          startTimerForQuestion(nextQEl);
+        }
+      }
+    }, 750);
+  };
+
+  startTimerForQuestion(questions[currQuestion]);
+
+  const scrollToElement = element => {
+    document.querySelector(element).scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
+</script>
+</body>
+</html>
