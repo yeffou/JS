@@ -1,0 +1,53 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "titre": "Software Engineer",
+      "description": "Develops software applications for various platforms.",
+      "salaire": 80000,
+      "Age": 2
+    },
+    {
+      "id": "2",
+      "titre": "Data Scientist",
+      "description": "Analyzes and interprets complex data sets to inform business decisions.",
+      "salaire": 90000,
+      "Age": 3
+    },
+    {
+      "id": "3",
+      "titre": "UX/UI Designer",
+      "description": "Creates intuitive and visually appealing user interfaces.",
+      "salaire": 75000,
+      "Age": 2
+    },
+    {
+      "id": "4",
+      "titre": "Marketing Manager",
+      "description": "Develops and executes marketing strategies to promote products or services.",
+      "salaire": 85000,
+      "Age": 4
+    },
+    {
+      "id": 6303,
+      "titre": "fkf;:gf:",
+      "description": "bbbbbbb",
+      "salaire": 100000,
+      "Age": 2
+    },
+    {
+      "id": 5414,
+      "titre": "farmer",
+      "description": "ehlsqidhsed",
+      "salaire": 10000,
+      "Age": 3
+    },
+    {
+      "id": 8330,
+      "titre": "Data Scientist",
+      "description": "WOOW",
+      "salaire": 2500,
+      "Age": 2
+    }
+  ]
+}
