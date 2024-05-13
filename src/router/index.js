@@ -8,7 +8,7 @@ import TagCloud from '../components/TagCloud.vue';
 
 const routes = [
   { path: '/posts',name:'PostList', component: PostList },
-  { path: '/tag',name:'TagCloud', component: TagCloud },
+  { path: '/tag/:tag',name:'TagCloud', component: TagCloud,props : true },
   { path: '/details/:id',name:'PostDetails', component: PostDetails,props:true },
   { path: '/create',name:'CreatePost', component: CreatePost },
   { path: '/edit/:id',name:'EditPost', component: EditPost,props:true },
